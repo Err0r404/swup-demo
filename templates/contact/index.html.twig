@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h1 class="display-3">Contact</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            {% if emailSent is same as(true) %}
+                <div class="alert alert-success">
+                    Your message has been sent
+                </div>
+            {% elseif emailSent is same as(false) %}
+                <div class="alert alert-danger">
+                    Your message cannot be sent
+                </div>
+            {% endif %}
+
+            {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            <div class="text-right">
+                <button role="button" type="submit" class="btn btn-lg btn-primary">Send</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

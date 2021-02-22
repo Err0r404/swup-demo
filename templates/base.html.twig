@@ -1,19 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+        <title>{% block title %}Swup Demo{% endblock %}</title>
+
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+
+    <body
+            {#data-controller="extends-swup symfony--ux-swup--swup"#}
+            data-controller="symfony--ux-swup--swup"
+            data-containers="#swup #nav" {# list of selectors separated by spaces #}
+            data-theme="slide" {# or "fade", the default #}
+            data-animate-history-browsing="data-animate-history-browsing" {# animate history browsing #}
+    >
+        {% include '_components/navbar.html.twig' %}
+
+        <div class="container" id="swup">
+            {% block body %}{% endblock %}
+        </div>
+
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/popper.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.js') }}"></script>
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </body>
 </html>

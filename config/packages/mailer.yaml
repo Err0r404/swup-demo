@@ -1,3 +1,7 @@
 framework:
     mailer:
         dsn: '%env(MAILER_DSN)%'
+        envelope:
+            sender: 'contact@swup-demo.wip'
+        headers:
+            from: 'Contact <contact@swup-demo.wip>'
