@@ -12,6 +12,7 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ContactController extends AbstractController
 {
@@ -25,7 +26,10 @@ class ContactController extends AbstractController
             ->setEmail('john.doe@anonymous.com')
             ->setMessage('Lorem ipsum');
         
-        $form = $this->createForm(ContactType::class, $contact, ['attr' => ['data-swup-form' => true]]);
+        $form = $this->createForm(ContactType::class, $contact, [
+            'attr' => ['data-swup-form' => true],
+            'action' => $this->generateUrl('contact', [], UrlGeneratorInterface::ABSOLUTE_URL)
+        ]);
         $form->handleRequest($request);
         
         $emailSent = null;
@@ -58,4 +62,5 @@ class ContactController extends AbstractController
             ]
         );
     }
+    
 }
